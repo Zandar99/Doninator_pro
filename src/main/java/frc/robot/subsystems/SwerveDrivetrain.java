@@ -1,9 +1,11 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenixpro.configs.Pigeon2Configuration;
+import com.ctre.phoenixpro.hardware.*;
 //import com.ctre.phoenix.sensors.PigeonIMU;
 
 import frc.robot.Constants;
+import frc.robot.Constants.CanBus;
 import frc.robot.utils.swerve.SwerveModule;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -30,8 +32,8 @@ public class SwerveDrivetrain extends SubsystemBase {
     private Field2d field;
 
     public SwerveDrivetrain() {
-        this.gyro = new Pigeon2(Constants.SwerveDrivetrain.GYRO_ID);
-        this.gyro.configFactoryDefault();
+        this.gyro = new Pigeon2(Constants.SwerveDrivetrain.GYRO_ID,Constants.CanBus.CanBusCvore);
+        this.gyro.getConfigurator().apply(new Pigeon2Configuration());
         this.zeroGyro();
 
         swerveModules = new SwerveModule[] {
@@ -119,9 +121,9 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     public Rotation2d getYaw() {
-        double[] ypr = new double[3];
-        this.gyro.getYawPitchRoll(ypr);
-        double yaw = optimizeGyro(ypr[0]);
+        //double[] ypr = new double[3];
+        //this.gyro.getgetYawPitchRoll(ypr);
+        double yaw = optimizeGyro(this.gyro.getYaw().getValue());
         return Constants.SwerveDrivetrain.INVERT_GYRO ? Rotation2d.fromDegrees(360 - yaw) : Rotation2d.fromDegrees(yaw);
     }
 
@@ -135,11 +137,11 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     public double getGyroPitchDegrees() {
         //change this next year pigeon 2 Pitch axis is Y
-        return this.gyro.getRoll() ;
+        return this.gyro.getRoll().getValue() ;
     }
 
     public double getGyroRoll() {
-        return this.gyro.getRoll();
+        return this.gyro.getRoll().getValue();
     }
 
 

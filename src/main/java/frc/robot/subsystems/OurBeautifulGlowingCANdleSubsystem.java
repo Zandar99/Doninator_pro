@@ -4,6 +4,12 @@ import frc.robot.Constants;
 
 import java.util.function.Supplier;
 
+import com.ctre.phoenixpro.controls.*;
+import com.ctre.phoenixpro.hardware.*;
+import com.ctre.phoenixpro.signals.*;
+import com.ctre.phoenixpro.configs.*;
+import com.ctre.phoenixpro.unmanaged.*;
+
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.CANdleConfiguration;
 import com.ctre.phoenix.led.RainbowAnimation;

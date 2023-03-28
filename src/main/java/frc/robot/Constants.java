@@ -4,10 +4,11 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+//import com.ctre.phoenixpro.motorcontrol.NeutralMode;
+import com.ctre.phoenixpro.signals.*;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
+//import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -15,6 +16,11 @@ import edu.wpi.first.math.util.Units;
 import frc.robot.utils.swerve.SwerveModuleConstants;
 
 public final class Constants {
+
+    public static final class CanBus {
+        public static final String  CanBusRio = "rio";
+        public static final String  CanBusCvore = "canivore";
+        }
 
     public static final class SwerveDrivetrain {
 
@@ -74,15 +80,15 @@ public final class Constants {
         public static double MAX_ANGULAR_VELOCITY = 11.5; // m/s //11.5
 
         /* Neutral Modes */
-        public static final NeutralMode ANGLE_NEUTRAL_MODE = NeutralMode.Coast;
-        public static final NeutralMode DRIVE_NEUTRAL_MODE = NeutralMode.Brake;
+        public static final NeutralModeValue ANGLE_NEUTRAL_MODE = NeutralModeValue.Coast;
+        public static final NeutralModeValue DRIVE_NEUTRAL_MODE = NeutralModeValue.Brake;
 
         /* Motor Inverts */
         public static final boolean DRIVE_MOTOR_INVERTED = false;
         public static final boolean ANGLE_MOTOR_INVERTED = true;
 
         /* Angle Encoder Invert */
-        public static final boolean CAN_CODER_INVERTED = false;
+        public static final SensorDirectionValue CAN_CODER_INVERTED = SensorDirectionValue.Clockwise_Positive;
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
@@ -126,9 +132,6 @@ public final class Constants {
         }
     }
 
-    public static final class Shooter {
-        public static final int SHOOTER_ID = 13;
-    }
 
     public static final class Auton {
         public static final double MAX_SPEED_MPS            = 4.0;    // meters per second
